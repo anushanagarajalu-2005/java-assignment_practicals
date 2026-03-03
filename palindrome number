@@ -1,0 +1,26 @@
+class Solution {
+    public boolean isPalindrome(int x) {
+        // negatives and numbers ending with zero (except 0) are not palindrome
+        if (x < 0 || (x % 10 == 0 && x != 0)) {
+            return false;
+        }
+
+        int reversedHalf = 0;
+
+        while (x > reversedHalf) {
+            reversedHalf = reversedHalf * 10 + (x % 10);
+            x /= 10;
+        }
+
+        // even length or odd length case handled
+        return x == reversedHalf || x == reversedHalf / 10;
+    }
+}
+o/p:
+Input
+x =
+121
+Output
+true
+Expected
+true
