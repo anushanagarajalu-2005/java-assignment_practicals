@@ -1,0 +1,40 @@
+class Solution {
+    public int firstMissingPositive(int[] nums) {
+        int n = nums.length;
+
+        // Step 1: Ignore numbers <= 0 and > n by converting them to a dummy value
+        for (int i = 0; i < n; i++) {
+            if (nums[i] <= 0 || nums[i] > n) {
+                nums[i] = n + 1;
+            }
+        }
+
+        // Step 2: Mark presence by making nums[val-1] negative
+        for (int i = 0; i < n; i++) {
+            int val = Math.abs(nums[i]);
+            if (val >= 1 && val <= n) {
+                if (nums[val - 1] > 0) {
+                    nums[val - 1] = -nums[val - 1];
+                }
+            }
+        }
+
+        // Step 3: First positive index + 1 is the missing number
+        for (int i = 0; i < n; i++) {
+            if (nums[i] > 0) {
+                return i + 1;
+            }
+        }
+
+        // If all 1..n are present
+        return n + 1;
+    }
+}
+o/p:
+Input
+nums =
+[1,2,0]
+Output
+3
+Expected
+3
