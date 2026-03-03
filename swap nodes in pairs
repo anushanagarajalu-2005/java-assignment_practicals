@@ -1,0 +1,31 @@
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        ListNode prev = dummy;
+
+        while (prev.next != null && prev.next.next != null) {
+            ListNode first = prev.next;
+            ListNode second = prev.next.next;
+
+            // Swap
+            first.next = second.next;
+            second.next = first;
+            prev.next = second;
+
+            // Move prev forward
+            prev = first;
+        }
+
+        return dummy.next;
+    }
+}
+o/p:
+Input
+head =
+[1,2,3,4]
+Output
+[2,1,4,3]
+Expected
+[2,1,4,3]
